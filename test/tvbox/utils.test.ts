@@ -41,26 +41,18 @@ describe('writeTvBoxJson', () => {
 
     expect(payload.lives).toHaveLength(2);
     expect(payload.lives[0]).toEqual({
-      group: 'One',
-      channels: [
-        {
-          name: 'One',
-          url: 'https://custom.example.com/txt/a.txt',
-          epg: 'https://iptv-sources2.pages.dev/epg/pw-7/{date}/a.json',
-          logo: 'https://tv-res.pages.dev/logo/a.png',
-        },
-      ],
+      name: 'One',
+      type: 0,
+      url: 'https://custom.example.com/txt/a.txt',
+      epg: 'https://iptv-sources2.pages.dev/epg/pw-7/{date}/a.json',
+      logo: 'https://tv-res.pages.dev/logo/a.png',
     });
     expect(payload.lives[1]).toEqual({
-      group: 'Two',
-      channels: [
-        {
-          name: 'Two',
-          url: 'https://custom.example.com/txt/b.txt',
-          epg: 'https://iptv-sources2.pages.dev/epg/pw-7/{date}/b.json',
-          logo: 'https://tv-res.pages.dev/logo/b.png',
-        },
-      ],
+      name: 'Two',
+      type: 0,
+      url: 'https://custom.example.com/txt/b.txt',
+      epg: 'https://iptv-sources2.pages.dev/epg/pw-7/{date}/b.json',
+      logo: 'https://tv-res.pages.dev/logo/b.png',
     });
   }, 20_000);
 });
