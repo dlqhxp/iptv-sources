@@ -143,7 +143,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
  * @param delayMs - 批次间延迟（毫秒），默认 300
  */
 export async function buildEpgPwXml(batchSize = 10, delayMs = 300): Promise<string> {
-  console.log('[EPG.PW] Fetching channel list from https://epg.pw/areas/cn.html ...');
+  console。log('[EPG.PW] Fetching channel list from https://epg.pw/areas/cn.html ...');
   const res = await fetch('https://epg.pw/areas/cn.html?lang=zh-hans', {
     signal: AbortSignal.timeout(30000),
   });
@@ -159,7 +159,7 @@ export async function buildEpgPwXml(batchSize = 10, delayMs = 300): Promise<stri
 
   const dates: string[] = [];
   const today = new Date();
-  for (let i = -5; i < 2; i++) {
+  for (let i = -1; i < 2; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
     dates.push(formatDate(date));
@@ -169,7 +169,7 @@ export async function buildEpgPwXml(batchSize = 10, delayMs = 300): Promise<stri
   const channelNodes: XmltvChannelNode[] = [];
   const programmeNodes: XmltvProgrammeNode[] = [];
   // const epgDir = makeEpgDir();
-  const basePath = await createSubDirectory('./m3u/epg/pw-7');
+  const basePath = await createSubDirectory('./m3u/epg/pw-3');
 
   for (const date of dates) {
     console.log(`[EPG.PW] Fetching EPG for date ${date} ...`);
