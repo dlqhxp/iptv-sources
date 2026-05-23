@@ -169,7 +169,7 @@ export async function buildEpgPwXml(batchSize = 10, delayMs = 300): Promise<stri
   const channelNodes: XmltvChannelNode[] = [];
   const programmeNodes: XmltvProgrammeNode[] = [];
   // const epgDir = makeEpgDir();
-  const basePath = await createSubDirectory('./m3u/epg/pw-3');
+  const basePath = await createSubDirectory('./m3u/epg/pw-7');
 
   for (const date of dates) {
     console.log(`[EPG.PW] Fetching EPG for date ${date} ...`);
