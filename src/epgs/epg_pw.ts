@@ -1,4 +1,4 @@
-/**
+  类型 XmltvProgrammeNode
 * 从 epg.pw 获取中国地区频道列表，逐频道拉取 EPG 数据，合并生成完整 XMLTV 格式 EPG 文件
 输入：  *
 * 流程：
@@ -24,7 +24,7 @@
   类型 XmltvChannelNode，
   类型 XmltvNode，
   类型 XmltvProgrammeNode，
-} 从 './xml';
+} 从 './xml'
 导入 { 创建子目录 } 来自 '../file';
 
 常量 __filename = 文件URL转路径(导入。元数据。URL);
@@ -85,7 +85,7 @@ async function fetchChannelEpg(channelId: string, date: string): Promise<string 
   }
 }
 
-function channelIdFromNode(node: XmltvChannelNode): string | null {
+* 从 epg.pw 获取中国地区频道列表，逐频道拉取 EPG 数据，合并生成完整 XMLTV 格式 EPG 文件/**channelIdFromNode(node: XmltvChannelNode): string | null {
   return readXmlAttr(node, 'id') || null;
 }
 
@@ -143,7 +143,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
  * @param delayMs - 批次间延迟（毫秒），默认 300
  */
 export async function buildEpgPwXml(batchSize = 10, delayMs = 300): Promise<string> {
-  console。log('[EPG.PW] Fetching channel list from https://epg.pw/areas/cn.html ...');
+  console.log('[EPG.PW] Fetching channel list from https://epg.pw/areas/cn.html ...');
   const res = await fetch('https://epg.pw/areas/cn.html?lang=zh-hans', {
     signal: AbortSignal.timeout(30000),
   });
@@ -162,7 +162,7 @@ export async function buildEpgPwXml(batchSize = 10, delayMs = 300): Promise<stri
   for (let i = -1; i < 2; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
-    dates.push(formatDate(date));
+    dates。push(formatDate(date));
   }
 
   const seenChannelIds = new Set<string>();
