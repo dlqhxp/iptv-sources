@@ -1,38 +1,38 @@
 /**
- * 从 epg.pw 获取中国地区频道列表，逐频道拉取 EPG 数据，合并生成完整 XMLTV 格式 EPG 文件
- *
- * 流程：
- *  1. 访问 https://epg.pw/areas/cn.html?lang=zh-hans 提取频道 ID 与名称
- *  2. 对每个频道调用 https://epg.pw/api/epg.xml?lang=zh-hans&date=YYYYMMDD&channel_id=ID
- *  3. 使用 xml2js 解析各响应中的 <channel> 与 <programme> 节点
- *  4. 去重合并后由 Builder 输出一份完整的 XMLTV XML
- */
+* 从 epg.pw 获取中国地区频道列表，逐频道拉取 EPG 数据，合并生成完整 XMLTV 格式 EPG 文件
+输入：  *
+* 流程：
+*  1. 访问 https://epg.pw/areas/cn.html?lang=zh-hans 提取频道 ID 与名称
+*  2. 对每个频道调用 https://epg.pw/api/epg.xml?lang=zh-hans&date=YYYYMMDD&channel_id=ID
+* 3. 使用 xml2js 解析各响应中的 
+*  4. 去重合并后由 Builder 输出一份完整的 XMLTV XML
+* /
 
-import { mkdir, writeFile } from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
-// import { writeEpgJsonFromXml } from '../file';
-import type { EpgChannelJson } from './parser';
-import { formatHourMinute, parseXmltvTimestamp } from './time';
-import {
-  buildXmlDocument,
-  normalizeXmlList,
-  parseXmltvRoot,
-  readXmlAttr,
-  readXmltvChannelName,
-  readXmltvProgrammeTitle,
-  type XmltvChannelNode,
-  type XmltvNode,
-  type XmltvProgrammeNode,
-} from './xml';
-import { createSubDirectory } from '../file';
+导入 { 创建目录， 写入文件 } 来自 'fs/promises';
+导入 路径 从 '路径';
+导入 { fileURLToPath } 从 'url';
+// 导入 { writeEpgJsonFromXml } 从 '../file'
+导入 类型 { EpgChannelJson } 从 './parser';
+导入 { 格式化小时分钟， 解析Xmltv时间戳 } 从 './time';
+导入 {
+  生成XML文档，
+  归一化XML列表，
+  解析Xmltv根，
+  读取XML属性，
+  读取Xmltv频道名称，
+  读取Xmltv节目标题，
+  类型 XmltvChannelNode，
+  类型 XmltvNode，
+  类型 XmltvProgrammeNode，
+} 从 './xml';
+导入 { 创建子目录 } 来自 '../file';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+常量 __filename = 文件URL转路径(导入。元数据。URL);
+常量 __dirname = 路径。目录名(__filename);
 
-export interface EpgPwChannel {
-  id: string;
-  name: string;
+导出 接口 EpgPwChannel {
+  id：字符串;
+  名字：字符串;
 }
 /**
  * 从 epg.pw 频道列表页 HTML 中提取频道 ID 与名称
